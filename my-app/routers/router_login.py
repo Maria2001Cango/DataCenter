@@ -25,7 +25,7 @@ def inicio():
 @app.route('/mi-perfil/<string:id>', methods=['GET'])
 def perfil(id):
     if 'conectado' in session:
-        
+          
         return render_template(f'public/perfil/perfil.html', info_perfil_session=info_perfil_session(id), dataLogin=dataLoginSesion(), areas=lista_areasBD(), roles=lista_rolesBD())
     else:
         return redirect(url_for('inicio'))
@@ -56,9 +56,9 @@ def cpanelRegisterUserBD():
         id_area = request.form['selectArea']
         id_rol = request.form['selectRol']
         pass_user = request.form['pass_user']
-
+        estado_civil = request.form['estado_civil']
         resultData = recibeInsertRegisterUser(
-            cedula, name, surname, id_area,id_rol,pass_user)
+            cedula, name, surname, id_area,id_rol,pass_user, estado_civil)
         if (resultData != 0):
             flash('la cuenta fue creada correctamente.', 'success')
             return redirect(url_for('inicio'))
@@ -124,7 +124,7 @@ def loginCliente():
                     session['name'] = account['nombre_usuario']
                     session['cedula'] = account['cedula']
                     session['rol'] = account['id_rol']
-
+                    
                     flash('la sesión fue correcta.', 'success')
                     return redirect(url_for('inicio'))
                 else:
@@ -147,7 +147,7 @@ def cerraSesion():
             session.pop('conectado', None)
             session.pop('id', None)
             session.pop('name_surname', None)
-            session.pop('email', None)
+            session.pop('email', None) 
             flash('tu sesión fue cerrada correctamente.', 'success')
             return redirect(url_for('inicio'))
         else:

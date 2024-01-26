@@ -25,15 +25,15 @@
             <th>Nombre</th>
             <th>Área</th>
             <th>Rol</th>
-            <th>estado_civil</th>
             <th>Acciones</th>
+            <th>estado_civil</th>
           </tr>
         </thead>
         <tbody>
           {% for usuario in resp_usuariosBD %}
           <tr>
             <td>{{ usuario.cedula}}</td>
-            <td>{{ usuario.nombre_usuario}} {{usuario.apellido_usuario}}</td> 
+            <td>{{ usuario.nombre_usuario}} {{usuario.apellido_usuario}}</td>
             <td>
               {%for area in areas%}
               {%if area.id_area == usuario.id_area%}
@@ -48,6 +48,7 @@
               {%endif%}
               {%endfor%}
             </td>
+            
             <td>
               <a
                   href="/mi-perfil/{{usuario.id_usuario}}"
@@ -57,7 +58,7 @@
                   Actualizar
                 </a>
                 <a
-                  style="color: white;"
+                  style="color: purple;"
                   onclick="eliminarUsuario('{{ usuario.id_usuario }}');"
                   class="btn btn-danger btn-sm"
                   data-bs-toggle="tooltip"
@@ -69,6 +70,7 @@
                   Eliminar
                 </a>
             </td>
+            <td>{{ usuario.estado_civil}}</td>
           </tr>
           {% endfor %}
         </tbody>
